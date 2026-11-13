@@ -325,6 +325,20 @@ a.entry:hover h2 { color: var(--accent); }
 .post-end a { color: var(--muted); text-decoration: none; }
 .post-end a:hover { color: var(--accent); }
 
+/* ----- Barra di avanzamento lettura ----- */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 100;
+  pointer-events: none;
+}
+
 /* ----- Footer ----- */
 .site-footer {
   margin-top: 96px;

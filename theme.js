@@ -39,6 +39,32 @@ document.addEventListener("DOMContentLoaded", function () {
     rt.textContent = min + " min di lettura";
   }
 
+  // --- Barra di avanzamento della lettura (solo negli articoli) ---
+  if (rt && prose) {
+    var bar = document.createElement("div");
+    bar.className = "progress";
+    bar.setAttribute("aria-hidden", "true");
+    document.body.prepend(bar);
+
+    var ticking = false;
+    function update() {
+      // 0% quando inizia il testo, 100% quando la fine del testo arriva in fondo allo schermo
+      var rect = prose.getBoundingClientRect();
+      var start = rect.top + window.scrollY - window.innerHeight * 0.25;
+      var end = rect.bottom + window.scrollY - window.innerHeight;
+      var p = end > start ? (window.scrollY - start) / (end - start) : 1;
+      p = Math.min(1, Math.max(0, p));
+      bar.style.transform = "scaleX(" + p + ")";
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+
   // --- Filtri per sezione (solo in home) ---
   var filters = document.querySelectorAll(".filters button");
   if (!filters.length) return;
