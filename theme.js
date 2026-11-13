@@ -26,6 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // --- Linea sotto l'header sticky quando si scorre ---
+  function markScrolled() {
+    document.documentElement.classList.toggle("scrolled", window.scrollY > 8);
+  }
+  window.addEventListener("scroll", markScrolled, { passive: true });
+  markScrolled();
+
   // --- Anno nel footer ---
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();

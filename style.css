@@ -77,7 +77,24 @@ a:hover { color: var(--accent); }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 32px 0 56px;
+  padding: 18px 0;
+  margin: 14px 0 40px;
+
+  /* Sticky: resta in alto mentre scorri */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  /* lo sfondo si estende a tutta la larghezza dello schermo */
+  box-shadow: 0 0 0 100vmax var(--bg);
+  clip-path: inset(0 -100vmax);
+  transition: background-color .25s ease, box-shadow .25s ease;
+}
+/* linea sottile sotto l'header quando la pagina è scorsa
+   (fatta con un'ombra: non allarga la pagina) */
+.scrolled .site-header {
+  box-shadow: 0 0 0 100vmax var(--bg), 0 1px 0 100vmax var(--border);
+  clip-path: inset(0 -100vmax -1px);
 }
 
 .logo {
@@ -335,7 +352,7 @@ a.entry:hover h2 { color: var(--accent); }
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: 0 50%;
-  z-index: 100;
+  z-index: 1000;
   pointer-events: none;
 }
 
@@ -361,7 +378,7 @@ a.entry:hover h2 { color: var(--accent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
 @media (max-width: 480px) {
-  .site-header { padding: 24px 0 40px; }
+  .site-header { padding: 14px 0; margin: 8px 0 32px; }
   .nav { gap: 14px; }
   .entry { grid-template-columns: 1fr; gap: 2px; }
   .entry time { padding-top: 0; }
